@@ -5,7 +5,7 @@ align 4
     dd 0x05
     dd -(0x1BADB002 + 0x05)
 
-    ; Graphics table (for VirtualBox VBE)
+
     dd 0, 0, 0, 0, 0
     dd 0                       ; 0 =Linear Graphics
     dd 1024
