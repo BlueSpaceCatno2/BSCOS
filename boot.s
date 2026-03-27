@@ -1,37 +1,41 @@
-; boot.s
+MBALIGN  equ  1 << 0
+MEMINFO  equ  1 << 1
+FLAGS    equ  MBALIGN | MEMINFO
+MAGIC    equ  0x1BADB002
+CHECKSUM equ -(MAGIC + FLAGS)
+
 section .multiboot
 align 4
-    dd 0x1BADB002
-    dd 0x05
-    dd -(0x1BADB002 + 0x05)
-
-
-    dd 0, 0, 0, 0, 0
-    dd 0                       ; 0 =Linear Graphics
-    dd 1024
-    dd 768
-    dd 32
-
-section .text
-global _start
-global idt_load
-extern k_main
-extern idtp
-
-_start:
-    mov esp, stack_top
-    push ebx
-    push eax
-    call k_main
-    cli
-.hang: hlt
-    jmp .hang
-
-idt_load:
-    lidt [idtp]
-    ret
+    dd MAGIC
+    dd FLAGS
+    dd CHECKSUM
 
 section .bss
 align 16
-stack_bottom: resb 16384
+stack_bottom:
+    resb 16384 ; 16 KiB
 stack_top:
+
+section .text
+global _start:function (_start.end - _start)
+_start:
+    mov esp, stack_top
+    
+    extern k_main
+    call k_main
+
+    cli
+.hang:
+    hlt
+    jmp .hang
+.end:
+
+; Interrupt Wrapper for Keyboard (IRQ 1)
+global irq1_wrapper
+extern keyboard_handler
+irq1_wrapper:
+    pushad
+    cld
+    call keyboard_handler
+    popad
+    iretd
