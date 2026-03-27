@@ -22,5 +22,5 @@ add_custom_command(TARGET bscos.bin POST_BUILD
         COMMAND cp ${CMAKE_BINARY_DIR}/bscos.bin ${CMAKE_BINARY_DIR}/iso_root/boot/
         COMMAND cp ${CMAKE_SOURCE_DIR}/grub.cfg ${CMAKE_BINARY_DIR}/iso_root/boot/grub/
         COMMAND grub-mkrescue -o ${CMAKE_BINARY_DIR}/bscos.iso ${CMAKE_BINARY_DIR}/iso_root
-        COMMENT "Generating bootable ISO..."
+        COMMENT "ISO's done mate!"
 )
