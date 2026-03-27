@@ -42,7 +42,7 @@ Building and Running:
 
 Stuffs'n'stuff:
 
-    boot.s: Assembly entry point. Handles the Multiboot header and sets up the stack before calling the C kernel.
+    boot.s: Assembly entry point. Does the booting? Duh.
 
     kernel.c: The main kernel logic. Includes a basic VGA text driver.
 
