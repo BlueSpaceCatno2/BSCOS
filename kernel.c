@@ -61,7 +61,7 @@ void bscos_syscall_handler(uint32_t eax, uint32_t ebx) {
 void k_main(uint32_t magic, struct multiboot_info* mb) {
     for (int i = 0; i < 80 * 25; i++) vga_buffer[i] = (uint16_t)' ' | (uint16_t)0x07 << 8;
 
-    k_print("BSCOS v8.0 - VirtualBox Debug Mode\n", 0x0B);
+    k_print("BSCOS v1.0 VirtualBox mode\n", 0x0B);
     k_print("----------------------------------\n\n", 0x03);
 
     log_status("Kernel Handshake", (magic == 0x2BADB002));
