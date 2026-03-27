@@ -19,5 +19,5 @@ add_custom_command(TARGET bscos.bin POST_BUILD
         COMMAND cp bscos.bin isodir/boot/bscos.bin
         COMMAND echo "menuentry 'BSCOS' { multiboot /boot/bscos.bin }" > isodir/boot/grub/grub.cfg
         COMMAND grub-mkrescue -o bscos.iso isodir
-        COMMENT "--- Universal ISO Created: bscos.iso ---"
+        COMMENT "wrong cmake used, bad iso likely made"
 )
