@@ -1,10 +1,16 @@
 BSCOS (Blue Space Cat Operating System)
 
+If you ever saw the project titled BSC-DOS that I made long ago, think of this as the spiritual sucessor to that piece of garbage.
+
+This is a full bare-metal operating system that I specifically designed because I needed a USB bootable system that would boot instantly, while being able to be customised to give direct hardware info, mainly while repairing computers.
+
+I am unlikely to maintin this very much because it does everything I need by default, there are some "dead" features in there, like the .BPK package manager being practically broken (and useless on a ramdisk or venoy USB)
+
 You CANNOT run this in an IDE, due to the built in video drivers it requires acces to memory locations that are already full. Refer to the building section for infirnation on how to get an iso.
 
 If you attempt to run the bscos.bin executable directly within your host OS (Linux/CLion), it will crash with a Segmentation Fault. This is expected behavior. A kernel is designed to run on bare metal; it attempts to access protected hardware memory (like 0xB8000), which the host OS will block for security.
 
-This is a 32-bit x86 operating system designed for BIOS-based hardware (specifically tested on a Dell Dimension) and VirtualBox. It is written in C and NASM assembly.
+This is a 32-bit x86 operating system designed for testing hardware (specifically tested on a Dell Dimension, and my laptop and VirtualBox. ) It is written in C and some NASM assembly.
 
 If you attempt to run the bscos.bin executable directly within your host OS (Linux/CLion), it will crash with a Segmentation Fault. This is expected behavior. A kernel is designed to run on bare metal and attempts to access protected hardware memory (like 0xB8000), which the host OS will block.
 
