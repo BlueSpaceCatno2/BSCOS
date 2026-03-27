@@ -54,7 +54,7 @@ void probe_vbox() {
     log_status("VirtualBox Hardware", 0);
 }
 
-/* --- THE CLAWS (SYSCALLS) --- */
+//the claws!
 void bscos_syscall_handler(uint32_t eax, uint32_t ebx) {
     if (eax == 1) k_print((char*)ebx, 0x0F);
 }
@@ -64,13 +64,13 @@ void k_main(uint32_t magic, struct multiboot_info* mb) {
     k_print("BSCOS v1.0 VirtualBox mode\n", 0x0B);
     k_print("----------------------------------\n\n", 0x03);
 
-    log_status("Kernel Handshake", (magic == 0x2BADB002));
+    log_status("Kernel Handshake", (magic == 0x2BADB002)); //it even has magic the name, DO NOT TOUCH IT.
     probe_vbox();
 
     uint32_t ram_mb = (mb->mem_upper / 1024) + 1;
     k_print("Detecting RAM: ", 0x0F);
     log_status("Memory Map Verified", 1);
 
-    k_print("\nadmin@bscos-bash# ", 0x0A);
+    k_print("\nadmin@bscos# ", 0x0A);
     while (1) { __asm__ volatile("hlt"); }
 }
