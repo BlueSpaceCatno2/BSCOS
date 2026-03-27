@@ -3,7 +3,9 @@
 #define VBOX_VENDOR_ID 0x80EE
 #define PCI_CONFIG_ADDR 0xCF8
 #define PCI_CONFIG_DATA 0xCFC
-
+// for command interperiter \/
+#define MAX_TOKENS 1024  
+#define MEM_SIZE 1024
 struct multiboot_info {
     uint32_t flags;
     uint32_t mem_lower;
@@ -74,3 +76,79 @@ void k_main(uint32_t magic, struct multiboot_info* mb) {
     k_print("\nadmin@bscos# ", 0x0A);
     while (1) { __asm__ volatile("hlt"); }
 }
+
+typedef struct {
+    char name[32];
+    int value;
+} Variable;
+
+/* typedef struct {
+    Variable vars[64];
+    int var_count;
+    int memory[MEM_SIZE]; 
+} OSContext; */
+
+void execute_line(OSContext *ctx, char *line) {
+    char cmd[32], arg1[32], op[8], arg2[32];
+    int n = sscanf(line, "%s %s %s %s", cmd, arg1, op, arg2);
+
+   /* if (strcmp(cmd, "sysinfo") == 0) {
+        gethw();
+    } */ //not possible without alot of spaghetti code
+    /* else if (strcmp(cmd, "ls") == 0) {
+        filelist ();
+    } */ //not possible without a FS
+    /* else if (strcmp(cmd, "edit") == 0) {
+        printf("Editing %s... (Type END to save)\n", arg1);
+        char buffer[256];
+        while(scanf("%s", buffer) && strcmp(buffer, "END") != 0);
+        printf("Saved %s.\n", arg1);
+    } */ //not possible without a FS either
+    /* else  if (n >= 3 && strcmp(arg1, "=") == 0) {
+        int val = atoi(op);
+        strcpy(ctx->vars[ctx->var_count].name, cmd);
+        ctx->vars[ctx->var_count].value = val;
+        ctx->var_count++;
+        printf("%s set to %d\n", cmd, val);
+    } */ //when you readd the FS, then uncomment.
+    else if (strcmp(cmd, "calc") == 0) {
+        printf("[RESULT] %d\n", atoi(arg1) + atoi(arg2));
+    }
+    else if (strcmp(cmd, "help") == 0) {
+        printf("Commands: sysinfo, ls, edit [file], [var] = [val], calc [a] [b]\n");
+    }
+}
+
+void startshell() {
+    OSContext ctx = {0};
+    char input[256];
+    printf("Type 'help' for commands.\n");
+
+    while (1) {
+        printf("# ");
+        if (!fgets(input, sizeof(input), stdin)) break;
+        if (strcmp(input, "exit\n") == 0) break;
+        execute_line(&ctx, input);
+    }
+}
+//leaving this cause I presume you're gonna finish it? \/
+#endif
+
+/*
+there is a built in scripting language for ease of use, and if your crasy, setting up genuine CLI commands.
+If you do not want the scripting language comment out lines 80 to 135.
+remember no files can be saved or modified by the system, as adding support for various filesystems was simply
+too much excess work for little/no gain.
+
+If you find a way to implement this, without causing serious performance imitations make a pull request
+ASAP.
+
+If there are any issues with the pre-included drivers, I dont know what to tell you, I used the power of a 15 year
+old stackoverflow thread to figure those out, and I dont even know, or want to know how they work.
+
+Also if I do my math correct, the ram size limit of this program would be 4gb cause its compiled for 32bit by
+the cmake, but I dont really mind anymore because I have already ventoyed arch onto the machines I was testing
+and gone on with my day.
+
+This repo likely wont get many updates cause its mostly useless compared to GNU/Linux.
+*/
