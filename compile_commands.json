@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/elitebook/CLionProjects/BSCOS/cmake-build-debug",
+  "command": "/usr/bin/cc  -m32 -ffreestanding -O2 -Wall -Wextra -nostdlib -g -fdiagnostics-color=always -o CMakeFiles/bscos.bin.dir/kernel.c.o -c /home/elitebook/CLionProjects/BSCOS/kernel.c",
+  "file": "/home/elitebook/CLionProjects/BSCOS/kernel.c",
+  "output": "/home/elitebook/CLionProjects/BSCOS/cmake-build-debug/CMakeFiles/bscos.bin.dir/kernel.c.o"
+}
+]
