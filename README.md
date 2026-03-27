@@ -44,7 +44,7 @@ Stuffs'n'stuff:
 
     boot.s: Assembly entry point. Does the booting? Duh.
 
-    kernel.c: The main kernel logic. Includes a basic VGA text driver.
+    kernel.c: The kernel. Includes a basic VGA text driver, but I reccomend setting it up cause its useless on its own, whatever commands I kept in there is very few.
 
     linker.ld: Linker script used to align sections and define the 1MB load address.
 
