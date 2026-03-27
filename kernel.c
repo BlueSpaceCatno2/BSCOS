@@ -46,7 +46,7 @@ void probe_vbox() {
             outl(PCI_CONFIG_ADDR, addr);
             uint32_t vendor = inl(PCI_CONFIG_DATA) & 0xFFFF;
             if (vendor == VBOX_VENDOR_ID) {
-                log_status("VirtualBox Guest Hardware Detected", 1);
+                log_status("VirtualBox Hardware Detected", 1);
                 return;
             }
         }
@@ -62,14 +62,14 @@ void k_main(uint32_t magic, struct multiboot_info* mb) {
     for (int i = 0; i < 80 * 25; i++) vga_buffer[i] = (uint16_t)' ' | (uint16_t)0x07 << 8;
 
     k_print("BSCOS v1.0 VirtualBox mode\n", 0x0B);
-    k_print("----------------------------------\n\n", 0x03);
+    //k_print("----------------------------------\n\n", 0x03);
 
     log_status("Kernel Handshake", (magic == 0x2BADB002)); //it even has magic the name, DO NOT TOUCH IT.
     probe_vbox();
 
     uint32_t ram_mb = (mb->mem_upper / 1024) + 1;
-    k_print("Detecting RAM: ", 0x0F);
-    log_status("Memory Map Verified", 1);
+    k_print("Detecting Memory: ", 0x0F);
+    log_status("Memory Verified", 1);
 
     k_print("\nadmin@bscos# ", 0x0A);
     while (1) { __asm__ volatile("hlt"); }
