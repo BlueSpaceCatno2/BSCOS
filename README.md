@@ -8,7 +8,7 @@ I am unlikely to maintin this very much because it does everything I need by def
 
 You CANNOT run this in an IDE, due to the built in video drivers it requires acces to memory locations that are already full. Refer to the building section for infirnation on how to get an iso.
 
-If you attempt to run the bscos.bin executable directly within your host OS (Linux/CLion), it will crash with a Segmentation Fault. This is expected behavior. A kernel is designed to run on bare metal; it attempts to access protected hardware memory (like 0xB8000), which the host OS will block for security.
+If you attempt to run the bscos.bin executable directly within your IDE, it will crash with a Segmentation Fault. The kernel is designed to run on bare metal; it attempts to access hardware memory (like 0xB8000), which the host OS will block for SOME REASON (way to be a party pooper).
 
 This is a 32-bit x86 operating system designed for testing hardware (specifically tested on a Dell Dimension, and my laptop and VirtualBox. ) It is written in C and some NASM assembly.
 
