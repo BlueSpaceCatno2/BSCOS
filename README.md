@@ -1,4 +1,4 @@
-BSCOS (Blue Space Cat Operating System)
+BSCOS (BlueSpaceCat(no2) Operating System)
 
 If you ever saw the project titled BSC-DOS that I made long ago, think of this as the spiritual sucessor to that piece of garbage.
 
@@ -22,7 +22,7 @@ The build system requires gcc-multilib for 32-bit compilation and several tools 
 
 Building and Running:
 
-    Prerequisites: nasm gcc-multilib grub libisoburn mtools xorriso qemu-desktop
+    Dependencies: nasm gcc-multilib grub libisoburn mtools xorriso qemu-desktop
 
     Build: run pack.py on kernel.c, it should give you a kernel.bin
 
